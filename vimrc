@@ -12,7 +12,9 @@ Bundle 'gmarik/vundle'
 " a) 指定Github中vim-scripts仓库中的插件，直接指定插件名称即可，插件明中的空格使用“-”代替。  
 "Bundle 'joonty/vim-xdebug.git'
 Bundle 'joonty/vdebug'
+Bundle 'bling/vim-airline'
   
+Bundle 'taglist.vim'
 "Bundle 'tpope/vim-rails.git'  
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'Valloric/YouCompleteMe'
@@ -41,13 +43,15 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let g:vdebug_options = {'ide_key': '1'}
 "let g:vdebug_options = {'server': '127.0.0.1'}
 let g:vdebug_options = {'port': '9010'}
+
+
 "YouCompleteMe 设置
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
 autocmd FileType javascrīpt set omnifunc=javascrīptcomplete#CompleteJS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-set completeopt=longest,menu
+"set completeopt=longest,menu
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"离开插入模式后自动关闭预览窗口
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"回车即选中当前项
 "上下左右键的行为 会显示其他信息
@@ -69,14 +73,21 @@ let g:ycm_seed_identifiers_with_syntax=1	" 语法关键字补全
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>"force recomile with syntastic
 "nnoremap <leader>lo :lopen<CR>	"open locationlist
 "nnoremap <leader>lc :lclose<CR>	"close locationlist
-inoremap <leader><leader> <C-x><C-o>
+"inoremap <leader><leader> <C-x><C-o>
 "在注释输入中也能补全
 let g:ycm_complete_in_comments = 1
 "在字符串输入中也能补全
 let g:ycm_complete_in_strings = 1
 "注释和字符串中的文字也会被收入补全
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
-
 " 跳转到定义处
 nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"设置taglist
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Use_Right_Window = 1
+let Tlist_Show_One_File=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_WinWidth = 32
+map <C-t> :TlistToggle<CR>
 " autocmd FileType PHP source vim/php.vim
