@@ -1,6 +1,6 @@
 set nocompatible              " be iMproved  
 filetype off                  " required!  
-  
+set fileencodings=utf-8,gbk,utf-16,big5 
 set rtp+=~/.vim/bundle/vundle/  
 call vundle#rc()  
   
@@ -8,82 +8,105 @@ call vundle#rc()
 " required!   
 Bundle 'gmarik/vundle'  
   
-" ¿ÉÒÔÍ¨¹ıÒÔÏÂËÄÖÖ·½Ê½Ö¸¶¨²å¼şµÄÀ´Ô´  
-" a) Ö¸¶¨GithubÖĞvim-scripts²Ö¿âÖĞµÄ²å¼ş£¬Ö±½ÓÖ¸¶¨²å¼şÃû³Æ¼´¿É£¬²å¼şÃ÷ÖĞµÄ¿Õ¸ñÊ¹ÓÃ¡°-¡±´úÌæ¡£  
+" å¯ä»¥é€šè¿‡ä»¥ä¸‹å››ç§æ–¹å¼æŒ‡å®šæ’ä»¶çš„æ¥æº  
+" a) æŒ‡å®šGithubä¸­vim-scriptsä»“åº“ä¸­çš„æ’ä»¶ï¼Œç›´æ¥æŒ‡å®šæ’ä»¶åç§°å³å¯ï¼Œæ’ä»¶æ˜ä¸­çš„ç©ºæ ¼ä½¿ç”¨â€œ-â€ä»£æ›¿ã€‚  
 "Bundle 'joonty/vim-xdebug.git'
 Bundle 'joonty/vdebug'
 Bundle 'bling/vim-airline'
   
 Bundle 'taglist.vim'
+Bundle 'drmingdrmer/xptemplate'
 "Bundle 'tpope/vim-rails.git'  
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'Valloric/YouCompleteMe'
   
-" c) Ö¸¶¨·ÇGithubµÄGit²Ö¿âµÄ²å¼ş£¬ĞèÒªÊ¹ÓÃgitµØÖ·  
+" c) æŒ‡å®šéGithubçš„Gitä»“åº“çš„æ’ä»¶ï¼Œéœ€è¦ä½¿ç”¨gitåœ°å€  
 "Bundle 'git://git.wincent.com/command-t.git'  
   
-" d) Ö¸¶¨±¾µØGit²Ö¿âÖĞµÄ²å¼ş  
+" d) æŒ‡å®šæœ¬åœ°Gitä»“åº“ä¸­çš„æ’ä»¶  
 "Bundle 'file:///Users/gmarik/path/to/plugin'  
   
 filetype plugin indent on     " required!  
 
-set nu " ÔÚ×ó²àĞĞºÅ 
-set cursorline "Í»³öÏÔÊ¾µ±Ç°ĞĞ
-set ruler "ÔÚÓÒÏÂ½ÇÏÔÊ¾¹â±êÎ»ÖÃµÄ×´Ì¬ĞĞ
-set autoindent "×Ô¶¯Ëõ½ø 
+set nu " åœ¨å·¦ä¾§è¡Œå· 
+set cursorline "çªå‡ºæ˜¾ç¤ºå½“å‰è¡Œ
+set ruler "åœ¨å³ä¸‹è§’æ˜¾ç¤ºå…‰æ ‡ä½ç½®çš„çŠ¶æ€è¡Œ
+set autoindent "è‡ªåŠ¨ç¼©è¿› 
+"TABæ›¿æ¢ä¸ºç©ºæ ¼
+set ts=4 
+set expandtab 
 
-"NERDTree ÉèÖÃ
+"vim-airlineè®¾ç½®
+"let g:airline_powerline_fonts=1
+set noshowmode
+set laststatus=2
+"let g:Powerline_symbols = 'fancy' " show fancy symbols (requires patched font)
+set encoding=utf-8
+
+"NERDTree è®¾ç½®
 "map <C-f> :NERDTreeMirror<CR>
 map <C-f> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-"xdebug ÉèÖÃ
+"xdebug è®¾ç½®
 "let g:debuggerPort = 9010
 let g:vdebug_options = {'ide_key': '1'}
 "let g:vdebug_options = {'server': '127.0.0.1'}
 let g:vdebug_options = {'port': '9010'}
 
+let g:vdebug_keymap = {
+    \    "run" : "<P-F5>",
+    \    "run_to_cursor" : "<F9>",
+    \    "step_over" : "<F2>",
+    \    "step_into" : "<F3>",
+    \    "step_out" : "<F4>",
+    \    "close" : "<F6>",
+    \    "detach" : "<F7>",
+    \    "set_breakpoint" : "<F10>",
+    \    "get_context" : "<F11>",
+    \    "eval_under_cursor" : "<F12>",
+    \    "eval_visual" : "<Leader>e",
+    \}
 
-"YouCompleteMe ÉèÖÃ
+"YouCompleteMe è®¾ç½®
 let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType javascr¨©pt set omnifunc=javascr¨©ptcomplete#CompleteJS
-autocmd FileType javascr¨©pt set omnifunc=javascr¨©ptcomplete#CompleteJS
+autocmd FileType javascrÄ«pt set omnifunc=javascrÄ«ptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 "set completeopt=longest,menu
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"Àë¿ª²åÈëÄ£Ê½ºó×Ô¶¯¹Ø±ÕÔ¤ÀÀ´°¿Ú
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"»Ø³µ¼´Ñ¡ÖĞµ±Ç°Ïî
-"ÉÏÏÂ×óÓÒ¼üµÄĞĞÎª »áÏÔÊ¾ÆäËûĞÅÏ¢
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif	"ç¦»å¼€æ’å…¥æ¨¡å¼åè‡ªåŠ¨å…³é—­é¢„è§ˆçª—å£
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"	"å›è½¦å³é€‰ä¸­å½“å‰é¡¹
+"ä¸Šä¸‹å·¦å³é”®çš„è¡Œä¸º ä¼šæ˜¾ç¤ºå…¶ä»–ä¿¡æ¯
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
 inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
 inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-"youcompleteme  Ä¬ÈÏtab  s-tab ºÍ×Ô¶¯²¹È«³åÍ»
-"let g:ycm_key_list_select_completion=['<c-n>']
+"youcompleteme  é»˜è®¤tab  s-tab å’Œè‡ªåŠ¨è¡¥å…¨å†²çª
 let g:ycm_key_list_select_completion = ['<Down>']
 "let g:ycm_key_list_previous_completion=['<c-p>']
 let g:ycm_key_list_previous_completion = ['<Up>']
-let g:ycm_confirm_extra_conf=0 "¹Ø±Õ¼ÓÔØ.ycm_extra_conf.pyÌáÊ¾
+let g:ycm_confirm_extra_conf=0 "å…³é—­åŠ è½½.ycm_extra_conf.pyæç¤º
 
-let g:ycm_collect_identifiers_from_tags_files=1	" ¿ªÆô YCM »ùÓÚ±êÇ©ÒıÇæ
-let g:ycm_min_num_of_chars_for_completion=2	" ´ÓµÚ2¸ö¼üÈë×Ö·û¾Í¿ªÊ¼ÂŞÁĞÆ¥ÅäÏî
-let g:ycm_cache_omnifunc=0	" ½ûÖ¹»º´æÆ¥ÅäÏî,Ã¿´Î¶¼ÖØĞÂÉú³ÉÆ¥ÅäÏî
-let g:ycm_seed_identifiers_with_syntax=1	" Óï·¨¹Ø¼ü×Ö²¹È«
+let g:ycm_collect_identifiers_from_tags_files=1	" å¼€å¯ YCM åŸºäºæ ‡ç­¾å¼•æ“
+let g:ycm_min_num_of_chars_for_completion=2	" ä»ç¬¬2ä¸ªé”®å…¥å­—ç¬¦å°±å¼€å§‹ç½—åˆ—åŒ¹é…é¡¹
+let g:ycm_cache_omnifunc=0	" ç¦æ­¢ç¼“å­˜åŒ¹é…é¡¹,æ¯æ¬¡éƒ½é‡æ–°ç”ŸæˆåŒ¹é…é¡¹
+let g:ycm_seed_identifiers_with_syntax=1	" è¯­æ³•å…³é”®å­—è¡¥å…¨
 "nnoremap <F5> :YcmForceCompileAndDiagnostics<CR>"force recomile with syntastic
 "nnoremap <leader>lo :lopen<CR>	"open locationlist
 "nnoremap <leader>lc :lclose<CR>	"close locationlist
 "inoremap <leader><leader> <C-x><C-o>
-"ÔÚ×¢ÊÍÊäÈëÖĞÒ²ÄÜ²¹È«
+"åœ¨æ³¨é‡Šè¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
 let g:ycm_complete_in_comments = 1
-"ÔÚ×Ö·û´®ÊäÈëÖĞÒ²ÄÜ²¹È«
+"åœ¨å­—ç¬¦ä¸²è¾“å…¥ä¸­ä¹Ÿèƒ½è¡¥å…¨
 let g:ycm_complete_in_strings = 1
-"×¢ÊÍºÍ×Ö·û´®ÖĞµÄÎÄ×ÖÒ²»á±»ÊÕÈë²¹È«
+"æ³¨é‡Šå’Œå­—ç¬¦ä¸²ä¸­çš„æ–‡å­—ä¹Ÿä¼šè¢«æ”¶å…¥è¡¥å…¨
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
-" Ìø×ªµ½¶¨Òå´¦
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" è·³è½¬åˆ°å®šä¹‰å¤„
+"nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-"ÉèÖÃtaglist
+"è®¾ç½®taglist
 let Tlist_Ctags_Cmd='/usr/bin/ctags'
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File=1
@@ -91,3 +114,44 @@ let Tlist_Exit_OnlyWindow=1
 let Tlist_WinWidth = 32
 map <C-t> :TlistToggle<CR>
 " autocmd FileType PHP source vim/php.vim
+
+"---------------alrLine Config--------------  
+set t_Co=256  
+set laststatus=2  
+set lazyredraw  
+"let g:airline_theme='powerlineish'  
+" ä½¿ç”¨powerlineæ‰“è¿‡è¡¥ä¸çš„å­—ä½“  
+let g:airline_powerline_fonts=1  
+if !exists('g:airline_symbols')  
+    let g:airline_symbols={}  
+endif  
+" å…³é—­ç©ºç™½ç¬¦æ£€æµ‹  
+let g:airline#extensions#whitespace#enabled=0  
+
+let g:airline_left_sep = 'î‚°'
+let g:airline_left_alt_sep = 'î‚±'
+let g:airline_right_sep = 'î‚²'
+let g:airline_right_alt_sep = 'î‚³'
+let g:airline_symbols.branch = 'î‚ '
+let g:airline_symbols.readonly = 'î‚¢'
+let g:airline_symbols.linenr = 'â˜°'
+let g:airline_symbols.maxlinenr = 'î‚¡'
+if has('vim_starting')
+    if &encoding !=? 'utf-8'
+        let &termencoding = &encoding
+    endif
+    set encoding=utf-8
+    set fileencoding=utf-8
+    set fileencodings=ucs-bom,utf-8,default,cp936
+endif
+
+"è°ƒè¯• 
+map <F5> :call CompileRunGcc()<CR>
+func! CompileRunGcc()
+        exec "w"
+        if &filetype == 'python'
+                exec "!time python %"
+        elseif &filetype == 'php'
+                exec  "python3 debugger.run()"
+        endif
+endfunc
