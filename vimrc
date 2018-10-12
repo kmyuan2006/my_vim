@@ -1,4 +1,3 @@
-set encoding=utf-8
 set nocompatible              " be iMproved  
 filetype on                  " required!  
 set encoding=utf-8 fileencodings=utf-8,gbk,utf-16,big5 
@@ -29,6 +28,8 @@ Bundle 'davidhalter/jedi-vim'
 
 Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 Bundle 'ryanoasis/vim-devicons'
+Bundle 'valloric/MatchTagAlways.git'
+Bundle 'vim-syntastic/syntastic'
 
   
 " c) 指定非Github的Git仓库的插件，需要使用git地址  
@@ -51,9 +52,10 @@ set ts=4
 set expandtab 
 
 "NERDTree 设置
-"map <C-f> :NERDTreeMirror<CR>
+map <C-f> :NERDTreeMirror<CR>
 map <C-f> :NERDTreeToggle<CR>
 let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 
@@ -128,67 +130,79 @@ map <C-t> :TlistToggle<CR>
 " autocmd FileType PHP source vim/php.vim
 
 ""vim-airline设置
-let g:powerline_pycmd="py3"
+let g:airline_theme="molokai"
+let g:Powerline_symbols='fancy'
+let g:Powerline_pycmd="py3"
+let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
 set t_Co=256
 syntax on
-let g:airline_theme='wombat'
 let g:airline_powerline_fonts=1
-let g:airline_symbols_ascii = 1   
-let g:airline#extensions#tabline#enabled = 1
+let g:airline_extensions = []
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled = 1
-set laststatus=2
-"if !exists('g:airline_symbols')
-"  let g:airline_symbols = {}
-"endif
 
-"if !exists('g:airline_powerline_fonts')
-"  let g:airline#extensions#tabline#left_sep = ' '
-"  let g:airline#extensions#tabline#left_alt_sep = '|'
-"  let g:airline_left_sep          = '▶'
-"  let g:airline_left_alt_sep      = '»'
-"  let g:airline_right_sep         = '◀'
-"  let g:airline_right_alt_sep     = '«'
-"  let g:airline#extensions#branch#prefix = '⤴' "➔, ➥, ⎇
-"  let g:airline#extensions#readonly#symbol   = '⊘'
-"  let g:airline#extensions#linecolumn#prefix = '¶'
-"  let g:airline#extensions#paste#symbol      = 'ρ'
-"  let g:airline_symbols.linenr    = '␊'
-"  let g:airline_symbols.branch = ''
-"  let g:airline_symbols.paste     = 'ρ'
-"  let g:airline_symbols.paste     = 'Þ'
-"  let g:airline_symbols.paste     = '∥'
-"  let g:airline_symbols.whitespace = 'Ξ'
-"else
-"  "let g:airline#extensions#tabline#left_sep = ''
-"  "let g:airline#extensions#tabline#left_alt_sep = ''
-"
-"  "" powerline symbols
-"  "let g:airline_left_sep = ''
-"  "let g:airline_left_alt_sep = ''
-"  "let g:airline_right_sep = ''
-"  "let g:airline_right_alt_sep = ''
-"  "let g:airline_symbols.branch = ''
-"  let g:airline_symbols.readonly = ''
-"  "let g:airline_symbols.linenr = ''
-"  let g:airline#extensions#tabline#left_sep = ' '
-"  let g:airline#extensions#tabline#left_alt_sep = '|'
-"  let g:airline_left_sep          = '▶'
-"  let g:airline_left_alt_sep      = '»'
-"  let g:airline_right_sep         = '◀'
-"  let g:airline_right_alt_sep     = '«'
-"  let g:airline#extensions#branch#prefix = '➔' "➔, ➥, ⎇
-"  let g:airline#extensions#readonly#symbol   = '⊘'
-"  let g:airline#extensions#linecolumn#prefix = '¶'
-"  let g:airline#extensions#paste#symbol      = 'ρ'
-"  let g:airline_symbols.linenr    = '␊'
-"  let g:airline_symbols.branch = ''
-"  let g:airline_symbols.paste     = 'ρ'
-"  let g:airline_symbols.paste     = 'Þ'
-"  let g:airline_symbols.paste     = '∥'
-"  let g:airline_symbols.whitespace = 'i'
-"  let g:airline_symbols.whitespace = 'Ξ'
-"
-"endif
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#enabled = 1
+set laststatus=2
+
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+
+if !exists('g:airline_powerline_fonts')
+  let g:airline#extensions#tabline#left_sep = ' '
+  let g:airline#extensions#tabline#left_alt_sep = '|'
+  let g:airline_left_sep          = '▶'
+  let g:airline_left_alt_sep      = '»'
+  let g:airline_right_sep         = '◀'
+  let g:airline_right_alt_sep     = '«'
+  let g:airline#extensions#branch#prefix = '⤴' "➔, ➥, ⎇
+  let g:airline#extensions#readonly#symbol   = '⊘'
+  let g:airline#extensions#linecolumn#prefix = '¶'
+  let g:airline#extensions#paste#symbol      = 'ρ'
+  let g:airline_symbols.linenr    = '␊'
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.paste     = 'ρ'
+  let g:airline_symbols.paste     = 'Þ'
+  let g:airline_symbols.paste     = '∥'
+  let g:airline_symbols.whitespace = 'Ξ'
+else
+  " powerline symbols
+  let g:airline_left_sep = ''
+  let g:airline_left_alt_sep = ''
+  let g:airline_right_sep = ''
+  let g:airline_right_alt_sep = ''
+  let g:airline_symbols.branch = ''
+  let g:airline_symbols.readonly = ''
+  let g:airline_symbols.linenr = ''
+  let g:airline_symbols.linenr = '␊'
+  let g:airline_symbols.linenr = '␤'
+  let g:airline_symbols.linenr = '¶'
+
+endif
+"配置Vue
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+
+"配置HTML标签匹配
+let g:mta_use_matchparen_group=1
+let g:mta_filetypes={
+    \ 'html':1,
+    \ 'vue' :1,
+    \ 'xml' :1,
+    \ 'xhtml' :1,
+    \ }
+
+"配置sytastic 语法提示
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
 "调试 
 map <F5> :call CompileRunGcc()<CR>
