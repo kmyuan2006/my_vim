@@ -18,18 +18,29 @@ Bundle 'joonty/vdebug'
 Bundle 'bling/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
   
+Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'taglist.vim'
 Bundle 'drmingdrmer/xptemplate'
 "Bundle 'tpope/vim-rails.git'  
+Bundle 'Lokaltog/powerline'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'Valloric/YouCompleteMe'
+"vue 开发插件
 Bundle 'posva/vim-vue'
+
 Bundle 'davidhalter/jedi-vim'
 
 Bundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 Bundle 'ryanoasis/vim-devicons'
 Bundle 'valloric/MatchTagAlways.git'
 Bundle 'vim-syntastic/syntastic'
+
+" 自动符号补齐
+Bundle 'Raimondi/delimitMate' 
+" 配色方案
+Bundle 'lifepillar/vim-solarized8'
+
+
 
   
 " c) 指定非Github的Git仓库的插件，需要使用git地址  
@@ -40,7 +51,7 @@ Bundle 'vim-syntastic/syntastic'
   
 "filetype plugin indent on     " required!  
 
-let mapleader="," "设置leader键
+let mapleader="\<space>" "设置leader键
 nmap <leader>v "+gp
 nmap <leader>c "+y
 set nu " 在左侧行号 
@@ -178,8 +189,9 @@ else
   let g:airline_symbols.linenr = '␊'
   let g:airline_symbols.linenr = '␤'
   let g:airline_symbols.linenr = '¶'
-
 endif
+let g:airline_right_sep=''
+let g:airline_left_sep=''
 "配置Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
@@ -201,6 +213,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+"配置eslint检查器
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
 
@@ -218,3 +231,18 @@ endfunc
 "autocmd FileType javascript set formatprg=prettier-eslint\ --stdin
 "autocmd BufWritePre *.js :normal gggqG
 "autocmd BufWritePre *.vua :normal gggqG
+
+"ctrlp 查找工具配置
+let g:ctrlp_map = '<leader>p'
+let g:ctrlp_cmd = 'CtrlP'
+map <leader>f :CtrlPMRU<CR>
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\v[\/]\.(git|hg|svn|rvm)$',
+    \ 'file': '\v\.(exe|so|dll|zip|tar|tar.gz|pyc)$',
+    \ }
+let g:ctrlp_working_path_mode=0
+let g:ctrlp_match_window_bottom=1
+let g:ctrlp_max_height=15
+let g:ctrlp_match_window_reversed=0
+let g:ctrlp_mruf_max=500
+let g:ctrlp_follow_symlinks=1
