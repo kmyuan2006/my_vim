@@ -25,8 +25,12 @@ Bundle 'drmingdrmer/xptemplate'
 Bundle 'Lokaltog/powerline'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'Valloric/YouCompleteMe'
-"vue 开发插件
+"前端,vue开发插件
 Bundle 'posva/vim-vue'
+Bundle 'mattn/emmet-vim'
+Bundle 'pangloss/vim-javascript'
+Bundle 'docunext/closetag.vim'
+
 
 Bundle 'davidhalter/jedi-vim'
 
@@ -141,60 +145,28 @@ map <C-t> :TlistToggle<CR>
 " autocmd FileType PHP source vim/php.vim
 
 ""vim-airline设置
-let g:airline_theme="molokai"
-let g:Powerline_symbols='fancy'
-let g:Powerline_pycmd="py3"
-let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
-set t_Co=256
-syntax on
-let g:airline_powerline_fonts=1
-let g:airline_extensions = []
-"let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#branch#enabled = 1
-
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tabline#enabled = 1
 set laststatus=2
+set t_Co=256
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#left_sep = ' '   "tabline中未激活buffer两端的分隔字符
+let g:airline#extensions#tabline#left_alt_sep = '|'      "tabline中buffer显示编号
+let g:airline#extensions#tabline#buffer_nr_show = 1
+map gt :bn<CR>
+map gT :bp<CR>
 
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-
-if !exists('g:airline_powerline_fonts')
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-else
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-  let g:airline_symbols.linenr = '␊'
-  let g:airline_symbols.linenr = '␤'
-  let g:airline_symbols.linenr = '¶'
-endif
-let g:airline_right_sep=''
-let g:airline_left_sep=''
 "配置Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
+autocmd BufRead,BufNewFile *.vue set ft=html
+let g:user_emmet_install_global=0
+autocmd FileType html,css,vue EmmetInstal
+" 修改Emmet扩展键 实现F2补全
+let g:user_emmet_expandabbr_key = '<F2>'
+" 修改Emmet默认快捷键 将默认的<C-y>修改成<C-e>方便操作
+let g:user_emmet_leader_key = '<C-e>'
+let g:closetag_html_style=1     " 支持 html 风格"
 
+"配置HTML标签匹配
 "配置HTML标签匹配
 let g:mta_use_matchparen_group=1
 let g:mta_filetypes={
@@ -213,6 +185,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 "配置eslint检查器
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = 'npm run lint --'
