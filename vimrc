@@ -160,11 +160,17 @@ autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 autocmd BufRead,BufNewFile *.vue set ft=html
 let g:user_emmet_install_global=0
 autocmd FileType html,css,vue EmmetInstal
+
 " 修改Emmet扩展键 实现F2补全
 let g:user_emmet_expandabbr_key = '<F2>'
 " 修改Emmet默认快捷键 将默认的<C-y>修改成<C-e>方便操作
 let g:user_emmet_leader_key = '<C-e>'
 let g:closetag_html_style=1     " 支持 html 风格"
+
+"vim-javascript
+let g:javascript_plugin_jsdoc=1    "Enables syntax highlighting for JSDocs.
+let g:javascript_plugin_ngdoc=1    "Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
+
 
 "配置HTML标签匹配
 "配置HTML标签匹配
