@@ -48,8 +48,10 @@ Bundle 'lifepillar/vim-solarized8'
 "版本控制
 Bundle 'mhinz/vim-signify'
 "文件内容搜索
-Bundle 'mhinz/vim-grepper'
+"Bundle 'mhinz/vim-grepper' "不能下载
 Bundle 'Xuyuanp/nerdtree-git-plugin'
+"注释插件
+Bundle 'scrooloose/nercommenter'
 
 
 
@@ -62,7 +64,7 @@ Bundle 'Xuyuanp/nerdtree-git-plugin'
   
 "filetype plugin indent on     " required!  
 
-let mapleader="\<space>" "设置leader键
+"let mapleader="\<space>" "设置leader键
 nmap <leader>v "+gp
 nmap <leader>c "+y
 set nu " 在左侧行号 
