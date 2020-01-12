@@ -30,6 +30,8 @@ Bundle 'posva/vim-vue'
 Bundle 'mattn/emmet-vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'docunext/closetag.vim'
+"自动格式化
+Bundle 'Chiel92/vim-autoformat'
 
 
 Bundle 'davidhalter/jedi-vim'
@@ -43,6 +45,11 @@ Bundle 'vim-syntastic/syntastic'
 Bundle 'Raimondi/delimitMate' 
 " 配色方案
 Bundle 'lifepillar/vim-solarized8'
+"版本控制
+Bundle 'mhinz/vim-signify'
+"文件内容搜索
+Bundle 'mhinz/vim-grepper'
+Bundle 'Xuyuanp/nerdtree-git-plugin'
 
 
 
@@ -158,14 +165,15 @@ map gT :bp<CR>
 "配置Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 autocmd BufRead,BufNewFile *.vue set ft=html
-let g:user_emmet_install_global=0
-autocmd FileType html,css,vue EmmetInstal
+au BufRead,BufNewFile *.vue set filetype=html
+let g:closetag_html_style=1     " 支持 html 风格"
 
 " 修改Emmet扩展键 实现F2补全
+let g:user_emmet_install_global=0
+autocmd FileType html,css,vue,md,markdown EmmetInstall
 let g:user_emmet_expandabbr_key = '<F2>'
 " 修改Emmet默认快捷键 将默认的<C-y>修改成<C-e>方便操作
 let g:user_emmet_leader_key = '<C-e>'
-let g:closetag_html_style=1     " 支持 html 风格"
 
 "vim-javascript
 let g:javascript_plugin_jsdoc=1    "Enables syntax highlighting for JSDocs.
