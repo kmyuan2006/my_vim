@@ -47,11 +47,12 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'lifepillar/vim-solarized8'
 "版本控制
 Bundle 'mhinz/vim-signify'
+Bundle 'tpope/vim-fugitive'
 "文件内容搜索
 "Bundle 'mhinz/vim-grepper' "不能下载
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-"注释插件
-Bundle 'scrooloose/nercommenter'
+"注释插件 该插件不能下载
+"Bundle 'scrooloose/nercommenter'
 
 
 
