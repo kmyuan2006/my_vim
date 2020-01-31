@@ -51,9 +51,8 @@ Bundle 'tpope/vim-fugitive'
 "文件内容搜索
 "Bundle 'mhinz/vim-grepper' "不能下载
 Bundle 'Xuyuanp/nerdtree-git-plugin'
-"注释插件 该插件不能下载
-"Bundle 'scrooloose/nercommenter'
-
+"注释插件 
+Bundle 'scrooloose/nerdcommenter'
 
 
   
@@ -236,3 +235,7 @@ let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
+
+"nerdcommenter 注释插件配置
+" 注释的时候自动加个空格, 强迫症必配
+let g:NERDSpaceDelims=1
