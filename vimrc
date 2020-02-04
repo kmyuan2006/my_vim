@@ -146,8 +146,8 @@ let g:ycm_python_binary_path = 'python'
 "nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "设置taglist
-"let Tlist_Ctags_Cmd='/usr/bin/ctags'
-let Tlist_Ctags_Cmd='~/.cache/tags'
+let Tlist_Ctags_Cmd='/usr/bin/ctags'
+"let Tlist_Ctags_Cmd='~/.cache/tags'
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -260,3 +260,4 @@ endif
 let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
 let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
 let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+"let g:gutentags_ctags_extra_args += ['--langdef=MYLUA','--langmap=MYLUA:.lua','--regex-MYLUA=/^local[ \t]+([a-zA-Z0-9_]+)[ \t]*=[ \t]*\{/\1/v,var/','--regex-MYLUA=/[ \t]*([a-zA-Z0-9_]+)[ \t]*=[ \t]*function[ \t]*\(/\1/f,function/','--regex-MYLUA=/function[ \t]+([a-zA-Z0-9_]+)[\.:]([a-zA-Z0-9_]+)[ \t]*\(/\2/f,function/','--langdef=PROTO','--langmap=PROTO:.proto','--regex-PROTO=/^[ \t]*message[ \t]+([a-zA-Z0-9_\.]+)/\1/m,message/','--regex-PROTO=/^[ \t]*(required|repeated|optional)[ \t]+[a-zA-Z0-9_\.]+[ \t]+([a-zA-Z0-9_]+)[ \t]*=/\2/f,field/']
