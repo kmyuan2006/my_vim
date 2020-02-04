@@ -32,7 +32,8 @@ Bundle 'pangloss/vim-javascript'
 Bundle 'docunext/closetag.vim'
 "自动格式化
 Bundle 'Chiel92/vim-autoformat'
-
+"自动生成tags插件
+Bundle 'ludovicchabant/vim-gutentags'
 
 Bundle 'davidhalter/jedi-vim'
 
@@ -145,7 +146,8 @@ let g:ycm_python_binary_path = 'python'
 "nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "设置taglist
-let Tlist_Ctags_Cmd='/usr/bin/ctags'
+"let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Ctags_Cmd='~/.cache/tags'
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
@@ -239,3 +241,22 @@ let g:ctrlp_follow_symlinks=1
 "nerdcommenter 注释插件配置
 " 注释的时候自动加个空格, 强迫症必配
 let g:NERDSpaceDelims=1
+
+" gutentags搜索工程目录的标志，碰到这些文件/目录名就停止向上一级目录递归 "
+let g:gutentags_project_root = ['.root', '.svn', '.git', '.project']
+
+" 所生成的数据文件的名称 "
+let g:gutentags_ctags_tagfile = '.tags'
+
+" 将自动生成的 tags 文件全部放入 ~/.cache/tags 目录中，避免污染工程目录 "
+let s:vim_tags = expand('~/.cache/tags')
+let g:gutentags_cache_dir = s:vim_tags
+" 检测 ~/.cache/tags 不存在就新建 "
+if !isdirectory(s:vim_tags)
+   silent! call mkdir(s:vim_tags, 'p')
+endif
+
+" 配置 ctags 的参数 "
+let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+let g:gutentags_ctags_extra_args += ['--c++-kinds=+pxI']
+let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
