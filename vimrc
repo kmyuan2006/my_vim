@@ -163,8 +163,11 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#left_sep = ' '   "tabline中未激活buffer两端的分隔字符
 let g:airline#extensions#tabline#left_alt_sep = '|'      "tabline中buffer显示编号
 let g:airline#extensions#tabline#buffer_nr_show = 1
+
+"缓冲区操作
 map gt :bn<CR>
 map gT :bp<CR>
+map gx :bdelete %<CR>
 
 "配置Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
