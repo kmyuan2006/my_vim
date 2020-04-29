@@ -1,8 +1,8 @@
 set nocompatible              " be iMproved  
 filetype on                  " required!  
 set encoding=utf-8 fileencodings=utf-8,gbk,utf-16,big5 
-set t_Co=256
-set background=dark
+colorscheme desert
+syntax on
 
 set rtp+=~/.vim/bundle/vundle/  
 call vundle#rc()  
@@ -146,8 +146,8 @@ let g:ycm_python_binary_path = 'python'
 "nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "设置taglist
-let Tlist_Ctags_Cmd='/usr/bin/ctags'
-"let Tlist_Ctags_Cmd='~/.cache/tags'
+"let Tlist_Ctags_Cmd='/usr/bin/ctags'
+let Tlist_Ctags_Cmd='~/.cache/tags'
 let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
